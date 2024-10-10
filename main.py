@@ -7,7 +7,7 @@ from AppRun import first_run, menu
 from pyfiglet import figlet_format
 
 def main():
-    config = dotenv_values(".env")
+    config = dotenv_values("../.env")
     
     # Airtable Initialization
     baseId, tableId, authToken = config["AIRTABLE_BASE_ID"], config["AIRTABLE_TABLE_ID"], config["AIRTABLE_ACCESS_TOKEN"]

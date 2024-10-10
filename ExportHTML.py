@@ -66,7 +66,7 @@ def export_to_html(records):
     
     MAX_FILE_COUNT = 5
     file_count = 0
-    relative_dir_path = "exports"
+    relative_dir_path = "../exports"
     for item in os.scandir(relative_dir_path):
         if item.is_file():
             file_count += 1
@@ -75,7 +75,7 @@ def export_to_html(records):
             delete_files_in_dir(relative_dir_path)
         
     filename = f"OtherResources_{time.strftime("%m-%d-%Y_%H%M%S")}.txt"
-    with open(f"exports/{filename}", 'w') as file:
+    with open(f"../exports/{filename}", 'w') as file:
         file.write(html)
     
     print(f"\nSuccessfully exported content to HTML!")
