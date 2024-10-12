@@ -12,7 +12,7 @@
 
    [zip]: https://github.com/mithileshkinjalkar/InnovationAssistant-WebScrapper/blob/main/GuideImages/DownloadZip.PNG "Download ZIP" 
    
-5. Extract the contents of the .zip file in the folder ypu wish to save the application to.
+5. Extract the contents of the .zip file in the folder you wish to save the application to.
 6. Locate a file titled '.env' in the application folder.
 7. Open the file using an editor and look for a field 'OPENAI-API-KEY'.
 8. Replace the text 'Enter Key Here' with the shared secret OpenAI API key.
