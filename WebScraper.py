@@ -1,6 +1,8 @@
 from langchain_community.document_loaders import WebBaseLoader
 from tqdm import tqdm
 
+# Function to extract URLs for each record in the Airtable
+# The record ID is preserved for writing later
 def extract_urls(records):
     """
         Params:
@@ -11,6 +13,7 @@ def extract_urls(records):
     """
     urls = list()
     
+    # Extracting the ID and URL if resource is a non-UCSD resource
     for record in records:
         id = record["id"]
         fields = record["fields"]
@@ -20,6 +23,7 @@ def extract_urls(records):
     return urls
 
 
+# Function to crawl across all the extracted URLs and scrape text on them
 def scrape_urls(urls):
     """
         Params:
@@ -33,6 +37,7 @@ def scrape_urls(urls):
     url, id = zip(*urls)
     loader = WebBaseLoader(url)
     
+    # Lazy loading for iterative operation
     i = 0
     for document in tqdm(loader.lazy_load(), 
                          desc="Scraping data",

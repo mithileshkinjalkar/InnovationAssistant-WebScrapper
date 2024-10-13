@@ -1,5 +1,5 @@
 from dotenv import dotenv_values, load_dotenv
-load_dotenv()
+load_dotenv() # Load environment variables from the .env file
 
 from AirtableIntegration import Airtable
 from ExportHTML import export_to_html
@@ -16,6 +16,7 @@ def main():
     print(figlet_format("Innovation Assistant Scraper", font="speed"))
     print("=======================================================================\n")
 
+    # Main loop for creating an interactive, user-facing application
     while True:
         response = input("Using the Scraper for the first time? (Y/N) ").lower()
         if response == 'yes' or response == 'y':
@@ -35,7 +36,7 @@ def main():
                 response = input("\nDo you wish to continue? (Y/N) ").lower()
                 if response == 'yes' or response == 'y':
                     choice = menu(airtable)
-                    if choice == 4: break
+                    if choice == 4: break # 'choice' value of '4' implies termination of the application
                 elif response == 'no' or response == 'n': break
                 else: print("Incorrect response, try again.\n")
 

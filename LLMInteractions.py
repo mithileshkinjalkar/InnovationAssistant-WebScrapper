@@ -3,6 +3,7 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from tqdm import tqdm
 
+# Function to initialize the LLM
 def init_llm(max_tokens=None):
     """
         Params:
@@ -12,6 +13,7 @@ def init_llm(max_tokens=None):
             --llm: Instantiated LLM object
     """
 
+    # We opted for 'gpt-4o-mini' because of cheaper usage charges
     llm = ChatOpenAI(
         name="gpt-4o-mini",
         temperature=0,
@@ -21,6 +23,8 @@ def init_llm(max_tokens=None):
     return llm
 
 
+# Function to prompt the integrated LLM for generating
+# summaries of the scraped raw HTML for each URL in the Airtable
 def generate_summary(scraped_text):
     """
         Params:
@@ -44,6 +48,9 @@ def generate_summary(scraped_text):
     ]
     prompt = ChatPromptTemplate.from_messages(messages)
 
+    # The chain will first build a prompt using the 'System' and 'User' messages
+    # This prompt will be fed to the LLM
+    # The parser will help to extract the response text from the LLM response
     chain = prompt | llm | parser
 
     for html_content, id in tqdm(scraped_text,
@@ -51,13 +58,15 @@ def generate_summary(scraped_text):
                                  ncols=100,
                                  unit="resource",
                                  colour="#35e48f"):
-        summary = chain.invoke({"html_content": html_content})
-        summaries.append((summary, id))
+        summary = chain.invoke({"html_content": html_content}) # Invoke the chain for each URL
+        summaries.append((summary, id)) # ID is again retained for Airtable writing purpose
     
     print()
     return summaries
 
 
+# Function to tag each summary with its appropriate industry
+# Highlighting which industry each resource belongs to
 def tag_industries(summaries):
     """
         Params:
@@ -164,6 +173,7 @@ def tag_industries(summaries):
     return industries
 
 
+# Function to classify/tag each resource by its type
 def tag_resource_types(summaries):
     """
         Params:
@@ -178,7 +188,7 @@ def tag_resource_types(summaries):
     parser = StrOutputParser()
 
     system_template = """
-        You are a helpful text tagging assistant. You will be provided with short summaries. You need to tag each summary appropriately using the below list of resource types. A single tag is to be returned for each summary. Only include the tag and do not include the number identifying the tag.
+        You are a helpful text tagging assistant. You will be provided with short summaries. You need to tag each summary appropriately using the below list of resource types. A single tag is to be returned for each summary.
 
         Resources Types:
         Accelerator

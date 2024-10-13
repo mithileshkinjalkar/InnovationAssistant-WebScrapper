@@ -5,6 +5,8 @@ from WebScraper import extract_urls, scrape_urls
 from LLMInteractions import generate_summary, tag_industries, tag_resource_types
 from ExportHTML import export_to_html
 
+
+# Function handling the application interface and processing for its first/clean run
 def first_run(airtable, records):
     """
         Params:
@@ -38,6 +40,8 @@ def first_run(airtable, records):
     records = airtable.integrate_airtable()
     set_key(dotenv_path="../.env", key_to_set="RECORD_COUNT", value_to_set=str(len(records)))
 
+
+# Function to handle the menu interface and make appropriate process calls as per user input
 def menu(airtable):
     """
         Params:
@@ -49,6 +53,8 @@ def menu(airtable):
 
     print("\nSelect an option:\n\t1. Update Airtable\n\t2. Export Data to HTML\n\t3. Reset Airtable\n\t4. Exit")
 
+    # 'choice' value of '4' indicates application termination
+    # It triggers breaking out of the interface loop
     while True:
         choice = input("\nChoice: ")
         try:
@@ -58,6 +64,8 @@ def menu(airtable):
                 config = dotenv_values("../.env")
                 record_count = int(config["RECORD_COUNT"])
 
+                # Check record count and update if necessary
+                # The below code aims to find the latest records (count of records to find equals the offset value)
                 if len(records) > record_count:
                     offset = len(records) - record_count
                     offset_records = deque()
@@ -75,16 +83,20 @@ def menu(airtable):
                                     offset_records.popleft()
                                     offset_records.append(record)
 
+                    # Once the additional records are identified a clean run with only those records is initiated
                     first_run(airtable, list(offset_records))
+                    # .env file is updated with the new record count
                     set_key(dotenv_path="../.env", key_to_set="RECORD_COUNT", value_to_set=str(len(records)))
                 
                 print("Airtable successfully updated!")
             elif choice == 2:
+                # Export data to raw HTML
                 export_to_html(records)
             elif choice == 3: 
+                # Reset or refresh the programmatic Airtable view
                 first_run(airtable, records)
                 print("System reset successful!")
-            elif choice == 4: pass
+            elif choice == 4: pass # Exit from the application
             else: raise ValueError
         except ValueError: print("Invalid choice, try again.")
         else: return choice
