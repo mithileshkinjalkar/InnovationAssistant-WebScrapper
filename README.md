@@ -23,3 +23,5 @@
 
 9. Navigate to the 'dist' folder within the application folder.
 10. Double-click on 'InnovationAssistantScraper.exe'.
+
+Note: Select 'Yes'/'y' when prompted whether it is the first time the application is being used, if running it for the first time on your system.
