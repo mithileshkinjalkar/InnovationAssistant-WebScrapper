@@ -19,7 +19,7 @@ def delete_files_in_dir(dir_path):
                 if file.is_file(): os.unlink(file.path)
             print(f"\nAll exported files deleted. Directory has been cleared.")
     except OSError:
-        print(f"\nError in deleting files. Delete manually if necessary (Path: {os.getcwd()}\exports).")
+        print(f"\nError in deleting files. Delete manually if necessary (Path: {os.getcwd()}\\exports).")
 
 
 # Function to export each Airtable resource, the resource summary, industry tag, and resource type to raw HTML
