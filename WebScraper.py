@@ -45,6 +45,20 @@ def scrape_urls(urls):
                          ncols=100,
                          unit="resource",
                          colour="#35e48f"):
+        if document.metadata["language"] == "No language found." or\
+            "500" in document.metadata["title"] or\
+            "502" in document.metadata["title"] or\
+            "403" in document.metadata["title"] or\
+            "404" in document.metadata["title"] or\
+            "401" in document.metadata["title"] or\
+            "410" in document.metadata["title"] or\
+            "503" in document.metadata["title"] or\
+            "504" in document.metadata["title"] or\
+            "414" in document.metadata["title"] or\
+            "408" in document.metadata["title"] or\
+            "415" in document.metadata["title"]: 
+            i += 1
+            continue
         scrapped_text.append((document.page_content, id[i]))
         i += 1
     
