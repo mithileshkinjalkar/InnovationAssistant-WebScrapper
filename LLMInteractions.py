@@ -40,7 +40,7 @@ def generate_summary(scraped_text):
     parser = StrOutputParser()
 
     system_template = """
-        You are a helpful text summarization assistant. You will be provided with scraped HTML data. You need to respond with a 4-5 sentence (300-400 words) summary. The response should not mention referencing the HTML data. The generated summary must be in third person. Extract the key themes from the text and highlight it in the summary.
+        You are a helpful text summarization assistant. You will be provided with scraped HTML data. You need to respond with a 4-5 sentence (300-400 words) summary. The generated summary must be strictly in third person. The response should not mention references to the scraped HTML data or text used to generate the summary. Extract the key themes from the text and highlight it in the summary.
     """.strip()
     messages = [
         ("system", system_template),
