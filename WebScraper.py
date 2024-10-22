@@ -45,6 +45,9 @@ def scrape_urls(urls):
                          ncols=100,
                          unit="resource",
                          colour="#35e48f"):
+        # Checking for cases when the scraper might give a error response
+        # Some cases were considered based on the application execution
+        # and the data this application deals with
         if "500" in document.metadata["title"] or\
             "502" in document.metadata["title"] or\
             "403" in document.metadata["title"] or\
