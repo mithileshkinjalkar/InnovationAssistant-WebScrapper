@@ -40,7 +40,11 @@ def generate_summary(scraped_text):
     parser = StrOutputParser()
 
     system_template = """
-        You are a helpful text summarization assistant. You will be provided with scraped HTML data. You need to respond with a 4-5 sentence (300-400 words) summary. The generated summary must be strictly in third person. The response should not mention references to the scraped HTML data or text used to generate the summary. Extract the key themes from the text and highlight it in the summary.
+        You are a helpful text summarization assistant. You will be provided with HTML data. You need to respond with a 4-5 sentence (300-400 words) summary. The generated summary must be strictly in third person. The response should not mention references to the HTML data or text used to generate the summary. Additionally, it should not explicitly mention the term summary. Extract the key themes from the text and highlight it in the summary.
+
+        Example of the type of summary response to avoid: "The HTML data pertains to Prof. Kelly Goldsmith and her work in marketing research, focusing on videos, slides, research best practices, and analytics. The content also includes bonus material related to these topics. Prof. Goldsmith's expertise in these areas is highlighted through the provided information."
+        
+        Example of the type of summary response expected: "Prof. Kelly Goldsmith is a recognized expert in marketing research, focusing on practical applications of marketing principles. Her educational resources, including videos and slides, provide valuable insights into research best practices, equipping learners with the tools necessary to navigate the complexities of the marketing landscape. Goldsmith emphasizes the importance of data-driven decision-making, as reflected in her "Analytics in Action" series, which demonstrates how analytics can be applied to solve real-world marketing problems. Additionally, she offers supplementary materials to further enhance understanding and provide a deeper dive into advanced marketing concepts. Her work aims to foster a thorough comprehension of marketing research and analytics for both students and professionals."
     """.strip()
     messages = [
         ("system", system_template),
