@@ -55,7 +55,8 @@ def scrape_urls(urls):
             "504" in document.metadata["title"] or\
             "414" in document.metadata["title"] or\
             "408" in document.metadata["title"] or\
-            "415" in document.metadata["title"]: 
+            "415" in document.metadata["title"] or\
+            "Unpublished" in document.metadata["title"]: 
             i += 1
             continue
         scrapped_text.append((document.page_content, id[i]))
