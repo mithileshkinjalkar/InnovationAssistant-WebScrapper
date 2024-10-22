@@ -45,8 +45,7 @@ def scrape_urls(urls):
                          ncols=100,
                          unit="resource",
                          colour="#35e48f"):
-        if document.metadata["language"] == "No language found." or\
-            "500" in document.metadata["title"] or\
+        if "500" in document.metadata["title"] or\
             "502" in document.metadata["title"] or\
             "403" in document.metadata["title"] or\
             "404" in document.metadata["title"] or\
